@@ -1,0 +1,12 @@
+<h1>Currencies</h1>
+
+<div id="currencies">
+  <% if @currencies.length > 0 %>
+    <% @currencies.each do |currency| %>
+      <%= render currency %>
+      ---
+    <% end %>
+  <% else %>
+    No currencies to show.
+  <% end %>
+</div>

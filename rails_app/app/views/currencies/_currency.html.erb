@@ -1,0 +1,16 @@
+<div id="<%= dom_id currency %>">
+  <p>
+    <strong>Symbol:</strong>
+    <%= currency.symbol %>
+  </p>
+
+  <p>
+    <strong>Latest exchange rate:</strong>
+    <%= currency.latest_exchange_rate %>
+  </p>
+
+  <% if user_signed_in? %>
+    Here you would see a button to follow this currency :)
+  <% end %>
+
+</div>

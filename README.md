@@ -6,6 +6,13 @@ This is an app in which a user can authenticate, follow and unfollow currencies.
 
 The deployment was done via docker containers. With the architecture described in the `docker-compose.yml` file.
 
+<u>These are the currently implemented features:</u>
+
+* Authentication (using [*devise*](https://github.com/heartcombo/devise))
+* Currencies:
+    * Listing
+    * <span style="color: gray;">Currencies are not getting updated</span>
+
 ### TODO add here
 
 * Ruby version
