@@ -1,6 +1,6 @@
 # Currency Manager
 
-This is an app in which a user can authenticate, follow and unfollow currencies, and check the most recent exchange rates for the followed currencies.
+This is an app in which a user can authenticate, follow and unfollow currencies. Additionally, the user can check the most recent exchange rates for the followed currencies.
 
 ## Deployment
 
