@@ -54,6 +54,12 @@ gem "devise"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+  # Use RSpec for tests
+  gem 'rspec-rails', '~> 6.0.0'
+
+  # Use faker for fake data
+  gem 'faker'
 end
 
 group :development do
