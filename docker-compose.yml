@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15.2-bullseye
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  rails_app:
+    build: ./rails_app
+    image: currency_manager:latest
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+
+volumes:
+  db:
+    driver: local
