@@ -9,6 +9,11 @@
     <%= "%.2f" % currency.latest_exchange_rate %>
   </p>
 
+  <p>
+    <strong>Updated at:</strong>
+    <%= currency.updated_at %>
+  </p>
+
   <% if user_signed_in? %>
     Here you would see a button to follow this currency :)
   <% end %>

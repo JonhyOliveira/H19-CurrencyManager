@@ -8,18 +8,17 @@ class UpdateCurrenciesJob < ApplicationJob
 
   def perform(*_args)
     response = @@endpoint.get
-      
+
     Currency.transaction do
-      response.body['data'].each { | symbol, rate |
-          currency = Currency.find_or_create_by symbol: symbol
+      response.body['data'].each { |symbol, rate|
+        currency = Currency.find_or_create_by symbol: symbol
 
-          unless currency.latest_exchange_rate == rate
-            currency.latest_exchange_rate = rate
+        unless currency.latest_exchange_rate == rate
+          currency.latest_exchange_rate = rate
 
-            currency.save
-          end
-          
-          } if response.success?
+          currency.save
+        end
+      }
     end
   end
 end

@@ -11,7 +11,7 @@ The deployment was done via docker containers. With the architecture described i
 * Authentication (using [*devise*](https://github.com/heartcombo/devise))
 * Currencies:
     * Listing
-    * <span style="color: gray;">Currencies are not getting updated</span>
+    * <span style="color: gray;">Currencies are not getting updated, </span>yet
 
 ### TODO add here
 

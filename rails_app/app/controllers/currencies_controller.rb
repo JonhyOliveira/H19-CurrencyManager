@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CurrenciesController < ApplicationController
-  before_action :set_currency, only: %i[show]
+  before_action :set_currency, only: :show
 
   # GET /currencies or /currencies.json
   def index

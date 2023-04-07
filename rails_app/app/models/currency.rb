@@ -5,8 +5,8 @@ class Currency < ApplicationRecord
   validates :latest_exchange_rate, presence: true, numericality: { greater_than: 0 }
 
   def symbol=(val)
-    val = val.upcase if val.respond_to? :upcase
-
     self[:symbol] = val
+
+    self[:symbol] = self[:symbol].upcase if self[:symbol].respond_to? :upcase!
   end
 end
