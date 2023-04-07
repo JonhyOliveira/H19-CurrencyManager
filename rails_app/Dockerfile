@@ -1,4 +1,4 @@
-FROM ruby:3.0.6-slim
+FROM ruby:3.0.6-bullseye
 
 LABEL author "joao.oliveira@hole19golf.com"
 
@@ -20,13 +20,15 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler
 RUN bundle install --jobs 20 --retry 5
 
+# install crontab 
+RUN mkdir ./config
+COPY ./config/schedule.rb ./config/schedule.rb
+RUN bundle exec whenever --update-crontab --set "environment=development"
+RUN mkdir -p /var/log/cron
+
 # copy the app
 COPY . .
 
-# mounts whenever tasks and starts cron
-RUN bundle exec whenever --update-crontab
-RUN cron
-
 # serve the app
 EXPOSE 3000
-CMD bundle exec rails server -b 0.0.0.0 
+CMD [ "sh", "-c", "cron && bundle exec rails server -b 0.0.0.0"]

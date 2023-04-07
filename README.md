@@ -9,9 +9,9 @@ The deployment was done via docker containers. With the architecture described i
 <u>These are the currently implemented features:</u>
 
 * Authentication (using [*devise*](https://github.com/heartcombo/devise))
-* Currencies:
-    * Listing
-    * <span style="color: gray;">Currencies are not getting updated, </span>yet
+* Currencies Exchange Rate:
+    * Listed
+    * Updated on a configurable period (uses [*whenever*](https://github.com/javan/whenever) to easily configure the crontab)
 
 ### TODO add here
 
