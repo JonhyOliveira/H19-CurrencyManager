@@ -6,7 +6,7 @@
 
   <p>
     <strong>Latest exchange rate:</strong>
-    <%= currency.latest_exchange_rate %>
+    <%= "%.2f" % currency.latest_exchange_rate %>
   </p>
 
   <% if user_signed_in? %>
