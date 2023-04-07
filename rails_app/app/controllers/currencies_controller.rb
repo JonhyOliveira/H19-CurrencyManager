@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CurrenciesController < ApplicationController
-  before_action :set_currency, only: %i[ show ]
+  before_action :set_currency, only: %i[show]
 
   # GET /currencies or /currencies.json
   def index
@@ -7,13 +9,12 @@ class CurrenciesController < ApplicationController
   end
 
   # GET /currencies/1 or /currencies/1.json
-  def show
-  end
+  def show; end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_currency
-      @currency = Currency.find(params[:id])
-    end
 
+  # Use callbacks to share common setup or constraints between actions.
+  def set_currency
+    @currency = Currency.find(params[:id])
+  end
 end

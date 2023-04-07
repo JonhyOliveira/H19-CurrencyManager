@@ -1,41 +1,41 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Currency, type: :model do
+  it 'is valid with acceptable parameters' do
+    currency = Currency.new
 
-	it "is valid with acceptable parameters" do
-		currency = Currency.new
+    currency.symbol = 'X'
+    currency.latest_exchange_rate = 0.1
 
-		currency.symbol = "X"
-		currency.latest_exchange_rate = 0.1
+    expect { currency.save }.to change(Currency, :count)
+  end
 
-		expect { currency.save }.to change(Currency, :count)
+  context 'is not valid' do
+    it 'with invalid symbol' do
+      currency = Currency.new
 
-	end
+      currency.symbol = nil
+      currency.latest_exchange_rate = 1
 
-	context "is not valid" do
-		it "with invalid symbol" do
-			currency = Currency.new
+      expect(currency).to_not be_valid
 
-			currency.symbol = nil
-			currency.latest_exchange_rate = 1
+      currency.symbol = ''
+      expect(currency).to_not be_valid
+    end
 
-			expect(currency).to_not be_valid
+    it 'with invalid exchange rate' do
+      currency = Currency.new
 
-			currency.symbol = ""
-			expect(currency).to_not be_valid
-		end
+      currency.symbol = 'V'
+      currency.latest_exchange_rate = nil
 
-		it "with invalid exchange rate" do
-			currency = Currency.new
+      expect(currency).to_not be_valid
 
-			currency.symbol = "V"
-			currency.latest_exchange_rate = nil
+      currency.latest_exchange_rate = 0
 
-			expect(currency).to_not be_valid
-
-			currency.latest_exchange_rate = 0
-
-			expect(currency).to_not be_valid
-		end
-	end
+      expect(currency).to_not be_valid
+    end
+  end
 end

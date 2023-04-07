@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# create the currencies table
 class CreateCurrencies < ActiveRecord::Migration[7.0]
   def change
     create_table :currencies, id: false do |t|
