@@ -10,14 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_06_160409) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_08_142856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "currencies", primary_key: "symbol", id: :string, force: :cascade do |t|
-    t.float "latest_exchange_rate", null: false
+  create_table "currencies", primary_key: "code", id: :string, force: :cascade do |t|
+    t.float "latest_exchange_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "symbol"
+    t.string "name"
+    t.string "name_plural"
+    t.integer "decimal_digits"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,4 +35,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_06_160409) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end
