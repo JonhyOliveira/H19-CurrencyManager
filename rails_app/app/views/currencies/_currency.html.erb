@@ -1,17 +1,12 @@
 <div id="<%= dom_id currency %>">
   <p>
-    <strong>Symbol:</strong>
-    <%= currency.symbol %>
+    <strong><%= currency.name %> (<%= currency.symbol %>)
+    </strong>
   </p>
 
   <p>
     <strong>Latest exchange rate:</strong>
-    <%= "%.2f" % currency.latest_exchange_rate %>
-  </p>
-
-  <p>
-    <strong>Updated at:</strong>
-    <%= currency.updated_at %>
+    <%= currency.latest_exchange_rate ? "%.2f" % currency.latest_exchange_rate : "N/A" %>
   </p>
 
   <% if user_signed_in? %>

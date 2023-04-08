@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class Currency < ApplicationRecord
-  validates :symbol, presence: true, length: { minimum: 1 }
-  validates :latest_exchange_rate, presence: true, numericality: { greater_than: 0 }
+  validates :code, presence: true, length: { minimum: 1 }
+  validates :latest_exchange_rate, allow_nil: true, numericality: { greater_than: 0 }
+  validates :symbol, presence: true
+  validates :name, presence: true
+  validates :name_plural, presence: true
 
-  def symbol=(val)
-    self[:symbol] = val
+  def code=(val)
+    self[:code] = val
 
-    self[:symbol] = self[:symbol].upcase if self[:symbol].respond_to? :upcase!
+    self[:code] = self[:code].upcase if self[:code].respond_to? :upcase!
   end
 end

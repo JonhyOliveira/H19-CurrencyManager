@@ -57,7 +57,7 @@ gem 'devise'
 gem 'interactor'
 gem 'interactor-rails'
 
-# Use faraday to interact with external APIs
+# Use Faraday to interact with FreecurrencyAPI REST API
 gem 'faraday'
 
 # Linting

@@ -22,6 +22,8 @@
 ENV.each { |k, v| env(k, v) }
 set :environment, ENV["RAILS_ENV"]
 
+job_type :runner,  "cd :path && bin/rails runner -e :environment ':task' :output"
+
 every 6.hour do
   path = "/var/log/cron/update_currencies"
   runner "UpdateCurrenciesJob.perform_now", output: {:standard => "#{path}.log", :error => "#{path}_error.log"}
