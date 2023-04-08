@@ -1,0 +1,1 @@
+docker exec -it currency_manager-rails_app-1 /bin/bash -l
