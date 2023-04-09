@@ -6,7 +6,7 @@ This is an app in which a user can authenticate, follow and unfollow currencies.
 
 The deployment was done via docker containers. With the architecture described in the `docker-compose.yml` file.
 
-<u>These are the currently implemented features:</u>
+## Features
 
 * 🧑‍💻 Authentication (using [*devise*](https://github.com/heartcombo/devise))
 * 🤑 Currencies, accompanied with exchange rate, updated using cron jobs (uses [*whenever*](https://github.com/javan/whenever) to easily configure the crontab)
