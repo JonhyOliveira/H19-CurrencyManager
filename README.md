@@ -8,10 +8,9 @@ The deployment was done via docker containers. With the architecture described i
 
 <u>These are the currently implemented features:</u>
 
-* Authentication (using [*devise*](https://github.com/heartcombo/devise))
-* Currencies Exchange Rate:
-    * Listed
-    * Updated on a configurable period (uses [*whenever*](https://github.com/javan/whenever) to easily configure the crontab)
+* 🧑‍💻 Authentication (using [*devise*](https://github.com/heartcombo/devise))
+* 🤑 Currencies, accompanied with exchange rate, updated using cron jobs (uses [*whenever*](https://github.com/javan/whenever) to easily configure the crontab)
+* **PARCIAL FEAT** - 👁️ Following currencies (there is support for the CurrencyFollower association but this is not yet implemented in the frontend)
 
 ### TODO add here
 
