@@ -7,11 +7,15 @@ class Currency < ApplicationRecord
   validates :name, presence: true
   validates :name_plural, presence: true
 
-  has_many :currency_followings, primary_key: :code, foreign_key: :followed_currency
+  has_many :currency_followings, primary_key: :code, foreign_key: :followed_currency, dependent: :destroy
 
   def code=(val)
     self[:code] = val
 
     self[:code] = self[:code].upcase if self[:code].respond_to? :upcase!
+  end
+
+  def ex_rate_rounded
+    self[:latest_exchange_rate].round(self[:decimal_digits])
   end
 end

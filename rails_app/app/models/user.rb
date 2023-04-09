@@ -6,5 +6,5 @@ class User < ApplicationRecord
 	devise :database_authenticatable, :registerable,
 	:recoverable, :rememberable, :validatable
 	
-	has_many :currency_followings, primary_key: :email, foreign_key: :follower_email
+	has_many :currency_followings, primary_key: :email, foreign_key: :follower_email, dependent: :destroy
 end
