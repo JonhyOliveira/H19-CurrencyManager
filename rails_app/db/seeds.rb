@@ -6,4 +6,5 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-User.create(email: "admin@local", password: "admin_")
+User.create email: "admin@local", password: "admin_"
+Currency.create code: "USD", name: "US Dollar", name_plural: "US dollars", symbol: "$", decimal_digits: 2, latest_exchange_rate: 1

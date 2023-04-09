@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_08_214418) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_09_192310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_08_214418) do
     t.string "followed_currency_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["follower_email", "followed_currency_code"], name: "unique_on_follower_+_followed_currency", unique: true
   end
 
   create_table "users", force: :cascade do |t|
