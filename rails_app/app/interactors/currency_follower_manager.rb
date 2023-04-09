@@ -1,7 +1,16 @@
 class CurrencyFollowerManager
 	include Interactor
 	
-	def call
+	#
+	# This interactor facilitates the process of a user following/unfollowing a currency
+	#
+	# @param [Context] context Hash that describes the context of the operation.
+	#		The format for a valid execution is the following: 
+	#		{ user: User, currency: Currency, follow: [true/false || true] }
+	#
+	# @return [Context] context describes the result of the operation
+	#
+	def call context
 		user = context.user
 		currency = context.currency
 		
