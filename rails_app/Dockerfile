@@ -1,6 +1,6 @@
 FROM ruby:3.0.6-bullseye
 
-LABEL author "joao.oliveira@hole19golf.com"
+LABEL author="joao.oliveira@hole19golf.com"
 
 # update the image and install necessary tools
 RUN apt-get update
@@ -20,7 +20,7 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler
 RUN bundle install --jobs 20 --retry 5
 
-# install crontab 
+# install crontab with whenever gem
 RUN mkdir ./config
 COPY ./config/schedule.rb ./config/schedule.rb
 RUN bundle exec whenever --update-crontab --set "environment=development"

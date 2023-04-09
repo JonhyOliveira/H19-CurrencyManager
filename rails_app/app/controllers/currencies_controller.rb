@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+#
+# This class controls the /currencies endpoint
+#
 class CurrenciesController < ApplicationController
-  before_action :set_currency, only: :show
 
   # GET /currencies or /currencies.json
   def index
@@ -9,12 +11,10 @@ class CurrenciesController < ApplicationController
   end
 
   # GET /currencies/1 or /currencies/1.json
-  def show; end
+  def show
+    @currency = Currency.find(params[:id])
+  end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_currency
-    @currency = Currency.find(params[:id])
-  end
 end
