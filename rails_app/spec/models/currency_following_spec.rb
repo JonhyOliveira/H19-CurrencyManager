@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe CurrencyFollowing, type: :model do
-
   before :each do
     CurrencyFollowing.destroy_all
     Rails.application.load_seed
@@ -13,10 +12,11 @@ RSpec.describe CurrencyFollowing, type: :model do
     following.follower = User.first
     following.followed_currency = Currency.first
 
-    expect { following.save }.to change(CurrencyFollowing, :count) 
-                            .and change { following.follower.currency_followings.count }.by(1)
-                            .and change { following.followed_currency.currency_followings.count }.by(1)
-
+    expect { following.save }.to change(CurrencyFollowing, :count)
+      .and change { following.follower.currency_followings.count }.by(1)
+                                                                  .and change {
+                                                                         following.followed_currency.currency_followings.count
+                                                                       }.by(1)
   end
 
   context "is not valid with" do
@@ -31,11 +31,10 @@ RSpec.describe CurrencyFollowing, type: :model do
 
     it "non existant email" do
       following = CurrencyFollowing.new
-      Currency.create 
 
       following.follower_email = "invalid@local"
       following.followed_currency = Currency.first
-      
+
       expect(following).to_not be_valid
     end
 
@@ -44,7 +43,7 @@ RSpec.describe CurrencyFollowing, type: :model do
 
       following.follower = User.first
       following.followed_currency_code = "ZZZ"
-      
+
       expect(following).to_not be_valid
     end
 
@@ -57,7 +56,7 @@ RSpec.describe CurrencyFollowing, type: :model do
       following.save
 
       copy = CurrencyFollowing.new
-      
+
       copy.follower = following.follower
       copy.followed_currency = following.followed_currency
 

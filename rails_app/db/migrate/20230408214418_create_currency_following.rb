@@ -1,7 +1,6 @@
 class CreateCurrencyFollowing < ActiveRecord::Migration[7.0]
   def change
     create_table :currency_followings do |t|
-
       t.string :follower_email
       t.string :followed_currency_code
 

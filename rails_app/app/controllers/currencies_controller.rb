@@ -4,7 +4,6 @@
 # This class controls the /currencies endpoint
 #
 class CurrenciesController < ApplicationController
-
   # GET /currencies or /currencies.json
   def index
     @currencies = Currency.all

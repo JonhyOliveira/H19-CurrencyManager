@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe CurrencyFollowerManager, type: :interactor do
-  
   before :each do
     CurrencyFollowing.destroy_all
     Rails.application.load_seed
@@ -10,12 +9,11 @@ RSpec.describe CurrencyFollowerManager, type: :interactor do
   describe '.call' do
     describe "fails when provided with invalid context" do
       context "such as" do
-
         it "insufficent context" do
           expect(CurrencyFollowerManager.call.failure?).to be true
-    
+
           expect(CurrencyFollowerManager.call(user: User.first).failure?).to be true
-    
+
           expect(CurrencyFollowerManager.call(currency: Currency.first).failure?).to be true
         end
 
@@ -31,9 +29,8 @@ RSpec.describe CurrencyFollowerManager, type: :interactor do
 
     describe "when provided with valid user and currency context" do
       context "but no follow context is provided" do
-
         parameters = Proc.new { { user: User.first, currency: Currency.first } }
-        
+
         it "succeds" do
           result = CurrencyFollowerManager.call parameters.call
 
@@ -46,7 +43,6 @@ RSpec.describe CurrencyFollowerManager, type: :interactor do
       end
 
       context "and {follow: true} context is provided" do
-
         parameters = Proc.new { { user: User.first, currency: Currency.first, follow: true } }
 
         it "succeds" do

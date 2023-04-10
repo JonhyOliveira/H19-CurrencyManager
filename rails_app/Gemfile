@@ -60,9 +60,6 @@ gem 'interactor-rails'
 # Use Faraday to interact with FreecurrencyAPI REST API
 gem 'faraday'
 
-# Linting
-gem 'rubocop', require: false
-
 # Use whenever to schedule jobs
 gem 'whenever', require: false
 
@@ -78,6 +75,13 @@ group :development, :test do
 
   # Use faker for fake data
   gem 'faker'
+
+  # Linting
+  gem 'rubocop', require: false
+  gem "rubocop-github", require: false
+  gem "rubocop-performance", require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do

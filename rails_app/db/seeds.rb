@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -7,4 +8,5 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 User.create email: "admin@local", password: "admin_"
-Currency.create code: "USD", name: "US Dollar", name_plural: "US dollars", symbol: "$", decimal_digits: 2, latest_exchange_rate: 1
+Currency.create code: "USD", name: "US Dollar", name_plural: "US dollars", symbol: "$", decimal_digits: 2,
+                latest_exchange_rate: 1

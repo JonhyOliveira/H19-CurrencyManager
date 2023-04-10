@@ -1,0 +1,28 @@
+# references:
+# https://github.com/bbatsov/rubocop
+# http://joanswork.com/rubocop-rails-getting-started/
+# https://github.com/SublimeLinter/SublimeLinter-rubocop
+
+# How to disable cops in source code for rule exceptions:
+# https://github.com/bbatsov/rubocop#disabling-cops-within-source-code
+
+# run `rubocop --auto-gen-config` to find count by
+# offense, and uncomment the following line to iterate
+require: rubocop-rails
+
+inherit_gem:
+  rubocop-github:
+    - config/default.yml
+    - config/rails.yml
+
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    # - 'features/**/*'
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    # - 'db/migrate/old_migrations/*'
+    # - 'lib/tasks/migrations/old/*'
+    - 'tmp/*'
