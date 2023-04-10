@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateCurrencyFollowing < ActiveRecord::Migration[7.0]
   def change
     create_table :currency_followings do |t|

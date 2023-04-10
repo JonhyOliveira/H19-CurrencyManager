@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # Although different REST API's data access policies follow the same principles,
 # their interfaces are very heterogeneous.

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddDetailsToCurrencies < ActiveRecord::Migration[7.0]
   def change
     change_column_null :currencies, :latest_exchange_rate, true

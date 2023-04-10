@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MakeCurrencyFollowingUniqueOnFollowerAndFollowedCurrency < ActiveRecord::Migration[7.0]
   def change
     change_table :currency_followings do |t|

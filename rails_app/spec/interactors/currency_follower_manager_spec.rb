@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe CurrencyFollowerManager, type: :interactor do
   before :each do
@@ -6,7 +7,7 @@ RSpec.describe CurrencyFollowerManager, type: :interactor do
     Rails.application.load_seed
   end
 
-  describe '.call' do
+  describe ".call" do
     describe "fails when provided with invalid context" do
       context "such as" do
         it "insufficent context" do

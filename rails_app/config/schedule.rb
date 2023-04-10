@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -24,7 +25,7 @@ set :environment, ENV["RAILS_ENV"]
 
 job_type :runner, "cd :path && bin/rails runner -e :environment ':task' :output"
 
-every 6.hour do
+every 6.hours do
   path = "/var/log/cron/update_currencies"
-  runner "UpdateCurrenciesJob.perform_now", output: { :standard => "#{path}.log", :error => "#{path}_error.log" }
+  runner "UpdateCurrenciesJob.perform_now", output: { standard: "#{path}.log", error: "#{path}_error.log" }
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CurrencyFollowing < ApplicationRecord
   validates :follower, presence: true
   validates :followed_currency, presence: true

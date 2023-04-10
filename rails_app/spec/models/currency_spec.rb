@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Currency, type: :model do
-  it 'is valid with acceptable parameters' do
+  it "is valid with acceptable parameters" do
     currency = Currency.new
 
     currency.code = Faker::Finance.ticker
@@ -16,9 +16,9 @@ RSpec.describe Currency, type: :model do
     expect { currency.save }.to change(Currency, :count)
   end
 
-  context 'is not valid' do
+  context "is not valid" do
     # TODO need to do more extensive tests here
-    it 'with invalid symbol' do
+    it "with invalid symbol" do
       currency = Currency.new
 
       currency.code = nil
@@ -26,11 +26,11 @@ RSpec.describe Currency, type: :model do
 
       expect(currency).to_not be_valid
 
-      currency.symbol = ''
+      currency.symbol = ""
       expect(currency).to_not be_valid
     end
 
-    it 'with invalid exchange rate' do
+    it "with invalid exchange rate" do
       currency = Currency.new
 
       currency.symbol = Faker::Finance.ticker
