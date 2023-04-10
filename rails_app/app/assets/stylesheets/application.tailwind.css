@@ -1,13 +1,83 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/*
 
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+
+  body {
+    @apply bg-slate-900 text-gray-400 text-base;
   }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+
+  .page-form {
+    @apply flex flex-col gap-4;
+  }
+
+  .page-form > h1 {
+    @apply text-2xl font-bold text-center ;
+  }
+
+  .page-form > form {
+    @apply bg-slate-800 px-8 py-4 rounded-lg flex flex-col gap-4;
+  }
+
+  .page-form > form > div {
+    @apply flex flex-col;
+  }
+
+  .page-form > form label {
+    @apply text-sm text-gray-300;
+  }
+
+  .page-form > form > input {
+    @apply transition ease-in-out duration-100 bg-cyan-800 hover:bg-cyan-600 hover:text-gray-700 px-8 py-2 rounded;
+  }
+
+  .page-form > ul {
+    @apply flex flex-col gap-1 text-center place-items-center text-sm;
+  }
+
+  .page-form > ul > li {
+    @apply text-slate-500 flex flex-row gap-4;
+  }
+
+  .page-form > ul > li > a, button {
+    @apply text-slate-400 hover:underline underline-offset-1 hover:text-slate-300;
+  }
+
+  nav {
+    @apply py-4 px-8 bg-slate-800 max-w-full flex flex-wrap items-center justify-between rounded-b-xl drop-shadow-2xl;
+  }
+
+  /* Navbar root navigation link */
+  nav > a { 
+    @apply font-bold text-teal-400 text-2xl;
+  }
+
+  /* Navbar secondary navigation layout */
+  nav > ul {
+    @apply grid grid-flow-col gap-8 text-slate-400;
+  }
+
+  /* Navbar secondary navigation links */
+  nav > ul > {
+    @apply hover:underline hover:underline-offset-4;
+  }
+
+  footer {
+    @apply text-sm text-center mb-20 mt-8 text-gray-500;
+  }
+
+  footer > hr {
+    @apply bg-slate-500 h-0.5 border-none;
+  }
+
+  footer a {
+    @apply hover:text-gray-600;
+  }
+
 }
 
-*/
+@tailwind components;
+@tailwind utilities;

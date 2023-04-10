@@ -11,18 +11,18 @@
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag 'application' %>
   </head>
-  <body class="bg-slate-900 text-emerald-600">
+  <body>
     <div id="app-container" class="container mx-auto">
-      <nav class="py-4 px-8 bg-slate-800 max-w-full flex flex-wrap items-center justify-between rounded-b-xl drop-shadow-2xl">
-        <%= link_to "the BEST Currency Manager.*", root_path, class: "font-bold text-teal-400 text-2xl" %>
-        <div id="nav-items" class="grid grid-flow-col gap-8 text-slate-400">
+      <nav>
+        <%= link_to "the BEST Currency Manager.*", root_path %>
+        <ul id="nav-items">
           <% if user_signed_in? %>
-            <%= link_to "Account Settings" %>
-            <%= link_to "Sign Out", destroy_user_session_path, class: "hover:underline hover:underline-offset-4", 
+            <%= link_to current_user.email, edit_user_registration_path %>
+            <%= link_to "Sign Out", destroy_user_session_path, 
                       data: { turbo_method: :delete, turbo_confirm: "See you soon? :)" } %>
           <% else %>
-            <%= link_to "Log In", new_user_session_path, class: "hover:underline hover:underline-offset-4" %>
-            <%= link_to "Register", new_user_registration_path, class: "hover:underline hover:underline-offset-4" %>
+            <%= link_to "Log In", new_user_session_path %>
+            <%= link_to "Register", new_user_registration_path %>
           <% end %>
         </ul>
       </nav>
@@ -32,12 +32,12 @@
       <p class="alert"><%= alert %></p>
 
       <div class="container py-4 px-8">
-        <div class="max-w-full text-gray-400 flex flex-col gap-5 place-items-center">
+        <div class="max-w-full flex flex-col gap-5 place-items-center">
           <%= yield %>
         </div>
       </div>
-      <footer class="text-sm text-center mb-20 mt-8">
-        <hr class="bg-slate-500 h-0.5 border-none">
+      <footer>
+        <hr>
         <br>
         *no guarantees<br>
         author: <%= mail_to "joao.oliveira@hole19golf.com" %>

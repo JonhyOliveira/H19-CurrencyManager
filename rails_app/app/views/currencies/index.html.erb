@@ -1,4 +1,4 @@
-<span class="text-2xl underline font-bold ml-4 place-self-start">Currencies</span>
+<h1 class="text-2xl font-bold ml-4 place-self-start">Available Currencies</h1>
 
   <% if @currencies.length > 0 %>
     <table class="table w-full rounded-lg border-2 border-slate-600 border-separate bg-slate-800 border-spacing-2 text-center">
@@ -8,7 +8,7 @@
           <th class="border-4 border-double border-slate-600 px-2 py-1.5">Symbol</th>
           <th class="border-4 border-double border-slate-600 px-2 py-1.5">Latest Exchange Rate</th>
           <% if user_signed_in? %>
-          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Following</th>
+          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Follows</th>
           <% end %>
         </tr>
       </thead>
@@ -20,7 +20,7 @@
           <td class="border border-slate-700 px-2 py-0.5"><%= currency.ex_rate_rounded %></td>
           <% if user_signed_in? %>
           <td class="border border-slate-700 px-2 py-0.5"><%= (current_user.currency_followings.map { |assoc| assoc.followed_currency }
-                                                                                .include? currency) ? "✓" : "𐄂" %></td>
+                                                                                .include? currency) ? "yes" : "" %></td>
           <% end %>
         </tr>
       <% end %>
