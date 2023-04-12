@@ -8,6 +8,9 @@ RUN apt-get install -y build-essential nodejs
 # postgresql lib
 RUN apt-get install -y libpq-dev
 
+# admin utilities
+RUN apt-get install -y nano
+
 # package necessary for whenever
 RUN apt-get install cron -y
 
