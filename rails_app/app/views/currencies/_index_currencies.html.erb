@@ -36,7 +36,7 @@
           <td class="border border-slate-700 px-2 py-0.5"><%= currency.symbol %></td>
           <% if user_signed_in? && !hide_follows %>
             <td class="border border-slate-700 px-2 py-0.5">
-              <% if current_user.currency_followings.map { |assoc| assoc.followed_currency }.include? currency %>
+              <% if current_user.currency_followings.where(followed_currency: currency).exists? %>
                 <%= button_to currency_follow_path(currency), method: :delete do %>
                   Yes
                 <% end %>
