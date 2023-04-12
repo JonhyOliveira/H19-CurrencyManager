@@ -5,7 +5,7 @@
 #
 class CurrenciesController < ApplicationController
 
-  before_action :authenticate_user!, only: [ :follow, :unfollow, :followed ]
+  before_action :authenticate_user!, only: [:follow, :unfollow, :followed]
 
   # GET /currencies or /currencies.json
   def index
@@ -40,7 +40,7 @@ class CurrenciesController < ApplicationController
     user = current_user
     currency = Currency.find(params[:currency_id])
 
-    CurrencyFollowerManager.call user: user, currency: currency, follow: true
+    CurrencyFollowerManager.call user:, currency:, follow: true
 
     redirect_back fallback_location: currencies_path
   end
@@ -50,7 +50,7 @@ class CurrenciesController < ApplicationController
     user = current_user
     currency = Currency.find(params[:currency_id])
 
-    CurrencyFollowerManager.call user: user, currency: currency, follow: false
+    CurrencyFollowerManager.call user:, currency:, follow: false
 
     redirect_back fallback_location: currencies_path
   end
