@@ -22,26 +22,30 @@
         <tr>
           <td class="border border-slate-700 px-2 py-0.5"><%= link_to currency.name, currency %></td>
           <td class="border border-slate-700 px-2 py-0.5">
+            <% if defined?(based_on) && based_on != nil %>
             <div class="targetable tooltip">
               <span class='tooltip-text bg-slate-700 -my-8 rounded'>
                 <%= format_currency_ex_rate currency, false, false %>
               </span>
-              <%= format_currency_ex_rate currency, defined? based_on && based_on != nil %>
+              <%= format_currency_ex_rate currency, true %>
             </div>
+            <% else %>
+              <%= format_currency_ex_rate currency, true %>
+            <% end %>
           </td>
           <td class="border border-slate-700 px-2 py-0.5"><%= currency.symbol %></td>
           <% if user_signed_in? && !hide_follows %>
-          <td class="border border-slate-700 px-2 py-0.5">
-            <% if current_user.currency_followings.map { |assoc| assoc.followed_currency }.include? currency %>
-              <%= button_to currency_follow_path(currency), method: :delete do %>
-                Yes
+            <td class="border border-slate-700 px-2 py-0.5">
+              <% if current_user.currency_followings.map { |assoc| assoc.followed_currency }.include? currency %>
+                <%= button_to currency_follow_path(currency), method: :delete do %>
+                  Yes
+                <% end %>
+              <% else %>
+                <%= button_to currency_follow_path(currency), method: :post do %>
+                  No
+                <% end %>
               <% end %>
-            <% else %>
-              <%= button_to currency_follow_path(currency), method: :post do %>
-                No
-              <% end %>
-            <% end %>
-          </td>
+            </td>
           <% end %>
         </tr>
       <% end %>
