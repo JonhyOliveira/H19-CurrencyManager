@@ -26,3 +26,6 @@ AllCops:
     # - 'db/migrate/old_migrations/*'
     # - 'lib/tasks/migrations/old/*'
     - 'tmp/*'
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never

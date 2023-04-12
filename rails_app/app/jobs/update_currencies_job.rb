@@ -21,7 +21,7 @@ class UpdateCurrenciesJob < ApplicationJob
 
       unless result.failure?
         result.data.each do |code, ex_rate|
-          curr = Currency.find_by(code:)
+          curr = Currency.find_by(code: code)
           unless curr.nil?
             curr.latest_exchange_rate = ex_rate
             curr.save
