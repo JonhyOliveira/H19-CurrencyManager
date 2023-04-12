@@ -4,11 +4,19 @@ Rails.application.routes.draw do
   
   devise_for :users
 
+  get "currencies/followed", to: "currencies#followed", as: "followed_currencies"
+  get "currencies/all", to: "currencies#all", as: "all_currencies"
+
   resources :currencies, only: [:show, :index] do
+
+    # alias to follow a currency
     put "follow", to: "currencies#follow"
-    put "unfollow", to: "currencies#unfollow"
+    post "follow", to: "currencies#follow"
+
+    # alias to unfollow
+    delete "follow", to: "currencies#unfollow"
   end
 
   # Defines the root path route ("/")
-  root to: "currencies#index"
+  root to: "currencies#followed"
 end

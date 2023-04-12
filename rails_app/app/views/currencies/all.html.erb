@@ -1,0 +1,7 @@
+<h1 class="text-2xl font-bold ml-4">Available Currencies</h1>
+
+<% if user_signed_in? %>
+    <%= render "currencies/index_currencies", currencies: @currencies, based_on: current_user.favorite_currency, hide_follows: false %>
+<% else %>
+    <%= render "currencies/index_currencies", currencies: @currencies , hide_follows: false %>
+<% end %>

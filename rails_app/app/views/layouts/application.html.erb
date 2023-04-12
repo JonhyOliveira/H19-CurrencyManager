@@ -16,8 +16,17 @@
       <nav>
         <%= link_to "the BEST Currency Manager.*", root_path %>
         <ul id="nav-items">
+          <%= link_to "All currencies", all_currencies_path %>
           <% if user_signed_in? %>
-            <%= link_to current_user.email, edit_user_registration_path %>
+            <div class="dropdown relative">
+              <button class="inline-flex items-center">
+                <span class="mr-1">Account</span>
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+              </button>
+              <ul class="dropdown-menu absolute hidden text-gray-700 pt-2">
+                <li class=""><%= link_to "Settings", edit_user_registration_path %></li>
+              </ul>
+            </div>
             <%= link_to "Sign Out", destroy_user_session_path, 
                       data: { turbo_method: :delete, turbo_confirm: "See you soon? :)" } %>
           <% else %>

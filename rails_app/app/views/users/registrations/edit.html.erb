@@ -2,6 +2,8 @@
 
   <h1>Edit <%= resource_name.to_s.humanize %></h1>
 
+  <span class="text-center">Change only the fields you wish to update.</span>
+
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -30,7 +32,7 @@
     <div class="field">
       <%= f.label :current_password %>
       <%= f.password_field :current_password, autocomplete: "current-password" %>
-      <i hidden >(we need your current password to confirm your changes)</i>
+      <i class="whitespace-pre-line">(we need your current password to confirm your changes)</i>
     </div>
 
     <div class="field">
@@ -44,7 +46,9 @@
   <ul>
     <li>
       <span>Unhappy?</span>
-      <%= button_to "🏃‍♂️ Leave", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+      <%= button_to "🏃‍♂️ Leave", registration_path(resource_name), 
+        data: { confirm: "Are you sure? You are about to delete your account.", 
+        turbo_confirm: "Are you sure? You are about to delete your account." }, method: :delete %>
     </li>
   </ul>
 

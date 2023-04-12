@@ -1,0 +1,52 @@
+<% 
+# This view NEEDS the `currencies` option to render properly
+# This view CAN receive the following optional options:
+#   hide_follows [Boolean] hides the column that indicates if the current user is following a certain currency
+#   based_on     [Currency] shows the exchange rates based on another currency's exchange rate 
+%>
+
+<% if currencies.length > 0 %>
+    <table class="table w-full rounded-lg border-2 border-slate-600 border-separate bg-slate-800 border-spacing-2 text-center">
+      <thead class="text-gray-300">
+        <tr>
+          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Name</th>
+          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Latest Exchange Rate</th>
+          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Symbol</th>
+          <% if user_signed_in? && !hide_follows %>
+          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Follows</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+      <% currencies.each do |currency| %>
+        <tr>
+          <td class="border border-slate-700 px-2 py-0.5"><%= link_to currency.name, currency %></td>
+          <td class="border border-slate-700 px-2 py-0.5">
+            <div class="targetable tooltip">
+              <span class='tooltip-text bg-slate-700 -my-8 rounded'>
+                <%= format_currency_ex_rate currency, false, false %>
+              </span>
+              <%= format_currency_ex_rate currency, defined? based_on && based_on != nil %>
+            </div>
+          </td>
+          <td class="border border-slate-700 px-2 py-0.5"><%= currency.symbol %></td>
+          <% if user_signed_in? && !hide_follows %>
+          <td class="border border-slate-700 px-2 py-0.5">
+            <% if current_user.currency_followings.map { |assoc| assoc.followed_currency }.include? currency %>
+              <%= button_to currency_follow_path(currency), method: :delete do %>
+                Yes
+              <% end %>
+            <% else %>
+              <%= button_to currency_follow_path(currency), method: :post do %>
+                No
+              <% end %>
+            <% end %>
+          </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    No currencies to show.
+  <% end %>
