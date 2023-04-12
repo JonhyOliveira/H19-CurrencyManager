@@ -15,7 +15,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+      <%= f.label :password, "New Password" %> <i hidden >(leave blank if you don't want to change it)</i>
       <%= f.password_field :password, autocomplete: "new-password" %>
       <% if @minimum_password_length %>
         <em><%= @minimum_password_length %> characters minimum</em>
@@ -28,8 +28,13 @@
     </div>
 
     <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+      <%= f.label :current_password %>
       <%= f.password_field :current_password, autocomplete: "current-password" %>
+      <i hidden >(we need your current password to confirm your changes)</i>
+    </div>
+
+    <div class="field">
+      <%= f.select :favorite_currency_code, Currency.all.collect { |curr| ["#{curr.symbol}: #{curr.name}", curr.code] }, include_blank: true %>
     </div>
 
     <%= f.submit "Update" %>
@@ -39,9 +44,9 @@
   <ul>
     <li>
       <span>Unhappy?</span>
-      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+      <%= button_to "🏃‍♂️ Leave", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
     </li>
   </ul>
-  <%= link_to "Back", :back %>
 
 </div>
+

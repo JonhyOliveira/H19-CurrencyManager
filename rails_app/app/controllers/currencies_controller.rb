@@ -9,8 +9,29 @@ class CurrenciesController < ApplicationController
     @currencies = Currency.all
   end
 
-  # GET /currencies/1 or /currencies/1.json
+  # GET /currencies/EUR or /currencies/EUR.json
   def show
     @currency = Currency.find(params[:id])
   end
+
+  # PUT /currencies/EUR/follow
+  def follow
+    before_action :authenticate_user!
+
+    user = current_user
+    currency = Currency.find(params[:id])
+
+    CurrencyFollowerManager.call user: user, currency: currency, follow: true
+  end
+
+  # PUT /currencies/EUR/unfollow
+  def unfollow
+    before_action :authenticate_user!
+
+    user = current_user
+    currency = Currency.find(params[:id])
+
+    CurrencyFollowerManager.call user: user, currency: currency, follow: false
+  end
+
 end

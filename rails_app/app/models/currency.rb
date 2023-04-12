@@ -7,7 +7,9 @@ class Currency < ApplicationRecord
   validates :name, presence: true
   validates :name_plural, presence: true
 
-  has_many :currency_followings, primary_key: :code, foreign_key: :followed_currency, dependent: :destroy
+  has_many :currency_followings, primary_key: :code, foreign_key: :followed_currency_code, dependent: :destroy
+  
+  has_many :favorited_by, class_name: "User", foreign_key: :favorite_currency_code, primary_key: :code
 
   def code=(val)
     self[:code] = val
