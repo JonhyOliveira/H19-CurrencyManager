@@ -27,15 +27,20 @@ class CurrenciesController < ApplicationController
   def followed
     user = current_user
 
-    @currencies = current_user.currency_following
-      .map { |following| following.followed_currency }
+    @currencies = user.followed_currencies
 
-    @user_following = current_user.currency_followings
+    @followed_codes = @currencies.map { | curr | curr.code }
   end
 
   # GET /currencies/all or /currencies/all.json
   def all
     @currencies = Currency.all
+
+    if user_signed_in?
+      user = current_user
+
+      @followed_codes = user.followed_currencies.map { | curr | curr.code }
+    end
   end
 
   # PUT /currencies/EUR/follow
@@ -43,9 +48,7 @@ class CurrenciesController < ApplicationController
     user = current_user
     currency = Currency.find(params[:currency_id])
 
-    CurrencyFollowerManager.call user: user, currency: currency, follow: true
-
-    redirect_back fallback_location: currencies_path
+    handle_result CurrencyFollowerManager.call user: user, currency: currency, follow: true
   end
 
   # DELETE /currencies/EUR/follow
@@ -53,7 +56,21 @@ class CurrenciesController < ApplicationController
     user = current_user
     currency = Currency.find(params[:currency_id])
 
-    CurrencyFollowerManager.call user: user, currency: currency, follow: false
+    handle_result CurrencyFollowerManager.call user: user, currency: currency, follow: false
+  end
+
+  #
+  # Handles the result of an interactor
+  #
+  # @param [Context] result the result of the interactor call
+  #
+  def handle_result result
+    
+    if result.failure?
+      flash[:alert] = result.literal if defined? result.literal
+      
+      flash[:alert] = I18n.t(result.message) if defined? result.message
+    end
 
     redirect_back fallback_location: currencies_path
   end

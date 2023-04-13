@@ -1,8 +1,8 @@
 <% 
 # This view NEEDS the `currencies` option to render properly
 # This view CAN receive the following optional options:
-#   hide_follows [Boolean] hides the column that indicates if the current user is following a certain currency
 #   based_on     [Currency] shows the exchange rates based on another currency's exchange rate 
+#   followed_codes     [String[]] specifies which currencies should be displayed as followed
 %>
 
 <% if currencies.length > 0 %>
@@ -12,7 +12,7 @@
           <th class="border-4 border-double border-slate-600 px-2 py-1.5">Name</th>
           <th class="border-4 border-double border-slate-600 px-2 py-1.5">Latest Exchange Rate</th>
           <th class="border-4 border-double border-slate-600 px-2 py-1.5">Symbol</th>
-          <% if user_signed_in? && !hide_follows %>
+          <% if defined?(followed_codes) %>
           <th class="border-4 border-double border-slate-600 px-2 py-1.5">Follows</th>
           <% end %>
         </tr>
@@ -34,9 +34,9 @@
             <% end %>
           </td>
           <td class="border border-slate-700 px-2 py-0.5"><%= currency.symbol %></td>
-          <% if user_signed_in? && !hide_follows %>
+          <% if defined?(followed_codes) %>
             <td class="border border-slate-700 px-2 py-0.5">
-              <% if current_user.currency_followings.where(followed_currency: currency).exists? %>
+              <% if followed_codes.include? currency.code %>
                 <%= button_to currency_follow_path(currency), method: :delete do %>
                   Yes
                 <% end %>

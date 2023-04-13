@@ -8,7 +8,7 @@ module CurrenciesHelper
 
       # if user has a favorite currency display the exchange rate as that currency
     if user_signed_in? && current_user.favorite_currency != nil
-      ex_rate /= current_user.favorite_currency.latest_exchange_rate
+      ex_rate = current_user.favorite_currency.latest_exchange_rate / ex_rate
 
       if round
         ex_rate = ex_rate.round current_user.favorite_currency.decimal_digits

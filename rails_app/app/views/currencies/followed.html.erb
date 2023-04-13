@@ -2,7 +2,7 @@
 
 <% if user_signed_in? %>
     <%= render "currencies/index_currencies", currencies: @currencies, 
-        hide_follows: false, based_on: current_user.favorite_currency %>
+        followed_codes: @followed_codes, based_on: current_user.favorite_currency %>
 <% else %>
     How did you get here? 🤨
 <% end %>
