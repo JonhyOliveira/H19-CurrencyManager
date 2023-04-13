@@ -27,9 +27,10 @@ class CurrenciesController < ApplicationController
   def followed
     user = current_user
 
-    @currencies = CurrencyFollowing.where(follower_email: user.email)
+    @currencies = current_user.currency_following
       .map { |following| following.followed_currency }
-    @hide_follows = true
+
+    @user_following = current_user.currency_followings
   end
 
   # GET /currencies/all or /currencies/all.json
