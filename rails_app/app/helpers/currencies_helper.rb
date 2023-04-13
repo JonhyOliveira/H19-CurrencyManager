@@ -4,7 +4,7 @@ module CurrenciesHelper
 
   def format_currency_ex_rate currency, include_descriptor = false, round = true
     
-    ex_rate = currency.latest_exchange_rate
+    ex_rate = relativize_ex_rate currency.latest_exchange_rate, round=round
 
     # format as a string
     formatted = ex_rate.to_s
