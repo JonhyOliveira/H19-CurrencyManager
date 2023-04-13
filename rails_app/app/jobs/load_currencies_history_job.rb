@@ -3,7 +3,7 @@ class LoadCurrenciesHistoryJob < ApplicationJob
 
   def perform **options
 
-    options[:date_range] ||= (DateTime.now.to_date - 1.day - 1.week)..(DateTime.now.to_date - 1.day)
+    options[:date_range] ||= (DateTime.now.to_date - 1.day - 1.year)..(DateTime.now.to_date - 1.day)
 
     Currency.transaction do
       # update record list

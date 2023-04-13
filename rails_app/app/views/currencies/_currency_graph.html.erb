@@ -1,0 +1,53 @@
+🤓
+<div class="shrink-0 grow w-full">
+<canvas id="myChart"></canvas>
+</div>
+😍
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  data = {
+    labels: <%= sanitize graph_range.map { | date | date.to_s }.to_s %>,
+    datasets: [
+    <% currency_codes.each do | currency_code | %>
+      {
+        label: "<%= sanitize currency_code %> exchange rate",
+        data: <%= sanitize CurrencyRecord.where(code: currency_code, record_date: graph_range)
+          .order(:record_date).map { | record | relativize_record_ex_rate record }.to_s %>,
+        borderWidth: 1
+      },
+    <% end %>
+    ]
+  }
+
+  options = {
+    scales: {
+      y: {
+        
+        grid: {
+          color: (context) => {
+            console.log(context)
+            if (context.tick.value > 1)
+              return "rgba(100, 240, 100, 0.4)"
+            else if (context.tick.value < 1)
+              return "rgba(240, 100, 100, 0.4)"
+            return "rgba(150, 150, 150, 0.4)"
+          },
+          display: true,
+          drawOnChartArea: true
+        }
+      },
+    },
+    cubicInterpolationMode: "monotone",
+    pointRadius: 0,
+    hitRadius: 5
+  }
+
+  new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: options
+  });
+</script>

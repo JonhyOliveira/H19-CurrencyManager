@@ -1,16 +1,29 @@
-<div id="<%= dom_id currency %>">
-  <p>
-    <strong><%= currency.name %> (<%= currency.symbol %>)
-    </strong>
-  </p>
+<div class="page-form" id="<%= dom_id currency %>">
 
-  <p>
-    <strong>Latest exchange rate:</strong>
-    <%= currency.latest_exchange_rate ? "%.2f" % currency.latest_exchange_rate : "N/A" %>
-  </p>
+  <h1>
+    <%= currency.name %> (<%= currency.symbol %>)
+  </h1>
 
   <% if user_signed_in? %>
-    Here you would see a button to follow this currency :)
-  <% end %>
+    <%= form_with url: currency_follow_path(currency), method: current_user.followed_currencies.include?(currency) ? :delete : :put do | form | %> 
+      <div>
+        <strong>Latest exchange rate:</strong> <%= format_currency_ex_rate currency %>
+        <strong>Last update:</strong> <%= currency.updated_at %>
+      </div>
 
+      <% if current_user.followed_currencies.include? currency %>
+        <span>Unfollow this currency and live a boring life.</span>
+        <%= form.submit "Unfollow" %>
+      <% else %>
+        <span>Follow this currency to receive updates <br>about it <span style="font-size: 0.25rem;" >(not really)</span>.</span>
+        <%= form.submit "Follow" %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
+
+<% if defined? graph_range %>
+  <div class="w-full flex" >
+    <%= render "currencies/currency_graph", currency_codes: [ currency.code ], graph_range: graph_range %>
+  </div>
+<% end %>

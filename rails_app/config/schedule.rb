@@ -29,3 +29,8 @@ every 6.hours do
   path = "/var/log/cron/update_currencies"
   runner "UpdateCurrenciesJob.perform_now", output: { standard: "#{path}.log", error: "#{path}_error.log" }
 end
+
+every 1.week do
+  path = "/var/log/cron/update_currencies_history"
+  runner "LoadCurrenciesHistoryJob.perform_now", output: { standard: "#{path}.log", error: "#{path}_error.log" }
+end
