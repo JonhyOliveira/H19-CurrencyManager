@@ -36,5 +36,6 @@ FileUtils.chdir APP_ROOT do
   puts "\n== Restarting application server =="
   system! 'bin/rails restart'
 
-  puts "\n !REMINDER! set the FreecurrencyAPI key in the secret credentials as 'free_currency.API_key'"
+  puts "\n !REMINDER! set the FreecurrencyAPI key in the secret credentials as 'free_currency.API_key'
+      or import the original master key to decrypt the existing credentials file."
 end
