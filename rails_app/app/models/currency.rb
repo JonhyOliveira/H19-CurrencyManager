@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Currency < ApplicationRecord
-  validates :code, presence: true, length: { minimum: 1 }
+
+  validates :code, presence: true, allow_nil: false, length: { minimum: 1 }
   validates :latest_exchange_rate, allow_nil: true, numericality: { greater_than: 0 }
   validates :symbol, presence: true
   validates :name, presence: true
@@ -10,6 +11,8 @@ class Currency < ApplicationRecord
   has_many :currency_followings, primary_key: :code, foreign_key: :followed_currency_code, dependent: :destroy
 
   has_many :favorited_by, class_name: "User", foreign_key: :favorite_currency_code, primary_key: :code
+
+  has_many :history, class_name: "CurrencyRecord", foreign_key: :code, primary_key: :code
 
   def code=(val)
     self[:code] = val

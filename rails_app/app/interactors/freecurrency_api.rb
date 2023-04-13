@@ -14,7 +14,9 @@ class FreecurrencyApi
   end
 
   def call
-    response = @@conn.get context.endpoint
+    response = @@conn.get context.endpoint do | req |
+      req.params = context.options if defined? context.options
+    end
 
     puts response.success?
     if response.success?

@@ -6,7 +6,7 @@ module CurrenciesHelper
     ex_rate = currency.latest_exchange_rate
     based_on = 1
 
-      # if user has a favorite currency display the exchange rate as that currency
+    # if the user has a favorite currency display the exchange rate as that currency
     if user_signed_in? && current_user.favorite_currency != nil
       ex_rate = current_user.favorite_currency.latest_exchange_rate / ex_rate
 
@@ -19,8 +19,8 @@ module CurrenciesHelper
       else
         return "#{ex_rate}" + (include_descriptor ? " #{current_user.favorite_currency.name_plural}" : "")
       end
-    # otherwise display it unaffiliated
-    else
+
+    else # otherwise display it unaffiliated
       return "#{ex_rate}"
     end
 

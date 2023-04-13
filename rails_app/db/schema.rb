@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_10_164329) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_13_143019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_164329) do
     t.index ["follower_email", "followed_currency_code"], name: "unique_on_follower_+_followed_currency", unique: true
   end
 
+  create_table "currency_records", force: :cascade do |t|
+    t.string "code", null: false
+    t.date "record_date", null: false
+    t.float "latest_exchange_rate", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code", "record_date"], name: "index_currency_records_on_code_and_record_date", unique: true
+    t.index ["code"], name: "index_currency_records_on_code"
+    t.index ["record_date"], name: "index_currency_records_on_record_date"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -47,5 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_164329) do
 
   add_foreign_key "currency_followings", "currencies", column: "followed_currency_code", primary_key: "code"
   add_foreign_key "currency_followings", "users", column: "follower_email", primary_key: "email"
+  add_foreign_key "currency_records", "currencies", column: "code", primary_key: "code"
   add_foreign_key "users", "currencies", column: "favorite_currency_code", primary_key: "code"
 end
