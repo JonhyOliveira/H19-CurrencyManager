@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe CurrencyRecord, type: :model do
   it "is valid with acceptable parameters" do
-    curr = Currency.create! code: Faker::Finance.ticker, symbol: "%", name: Faker::Coin.name, 
+    curr = Currency.create! code: Faker::Finance.ticker, symbol: "%", name: Faker::Coin.name,
       name_plural: Faker::Coin.name, latest_exchange_rate: 0.1, decimal_digits: 4
 
     currency_record = CurrencyRecord.new
@@ -19,7 +19,7 @@ RSpec.describe CurrencyRecord, type: :model do
   context "is not valid" do
     # TODO need to do more extensive tests here
     it "with non-existant currency's code" do
-      curr = Currency.create! code: Faker::Finance.ticker, symbol: "%", name: Faker::Coin.name, 
+      curr = Currency.create! code: Faker::Finance.ticker, symbol: "%", name: Faker::Coin.name,
         name_plural: Faker::Coin.name, latest_exchange_rate: 0.1, decimal_digits: 4
 
       currency_record = CurrencyRecord.new
@@ -36,7 +36,7 @@ RSpec.describe CurrencyRecord, type: :model do
     end
 
     it "with invalid exchange rate" do
-      curr = Currency.create! code: Faker::Finance.ticker, symbol: "%", name: Faker::Coin.name, 
+      curr = Currency.create! code: Faker::Finance.ticker, symbol: "%", name: Faker::Coin.name,
         name_plural: Faker::Coin.name, latest_exchange_rate: 0.1, decimal_digits: 4
 
       currency_record = CurrencyRecord.new

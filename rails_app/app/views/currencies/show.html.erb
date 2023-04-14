@@ -1,1 +1,1 @@
-<%= render @currency, graph_range: ((DateTime.now - 1.day - 1.year).to_date)...((DateTime.now - 1.day).to_date) %>
+<%= render @currency, graph_range: @graph_range || ((DateTime.now - 1.day - 1.year).to_date)...((DateTime.now - 1.day).to_date) %>

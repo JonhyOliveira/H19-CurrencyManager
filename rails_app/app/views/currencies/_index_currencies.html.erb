@@ -36,15 +36,8 @@
           <td class="border border-slate-700 px-2 py-0.5"><%= currency.symbol %></td>
           <% if defined?(followed_codes) %>
             <td class="border border-slate-700 px-2 py-0.5">
-              <% if followed_codes.include? currency.code %>
-                <%= button_to currency_follow_path(currency), method: :delete do %>
-                  Yes
-                <% end %>
-              <% else %>
-                <%= button_to currency_follow_path(currency), method: :post do %>
-                  No
-                <% end %>
-              <% end %>
+              <%= button_to followed_codes.include?(currency.code) ? "Yes" : "No", 
+                currency_follow_path(currency), method: followed_codes.include?(currency.code) ? :delete : :post %>
             </td>
           <% end %>
         </tr>

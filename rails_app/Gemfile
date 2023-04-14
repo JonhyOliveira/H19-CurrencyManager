@@ -57,7 +57,7 @@ gem "devise"
 gem "interactor"
 gem "interactor-rails"
 
-# Use Faraday to interact with FreecurrencyAPI REST API
+# Use Faraday to interact with FreecurrencyAPI's REST API
 gem "faraday"
 
 # Use whenever to schedule jobs

@@ -1,1 +1,8 @@
-docker exec -it currency_manager-rails_app-1 /bin/bash
+_PWD=$(pwd | tr "/" " ")
+
+APP=${_PWD##* }-rails_app-1
+
+echo "Attaching to $APP"
+echo
+
+docker exec -it $APP /bin/bash

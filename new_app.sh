@@ -1,1 +1,0 @@
-rails new --database=postgresql ./rails_app

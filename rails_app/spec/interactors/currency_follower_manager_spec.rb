@@ -68,7 +68,7 @@ RSpec.describe CurrencyFollowerManager, type: :interactor do
 
         it "does not create duplicates" do
           expect { CurrencyFollowerManager.call parameters.call }.to change(CurrencyFollowing, :count)
-          
+
           5.times do
             expect { CurrencyFollowerManager.call parameters.call }.to_not change(CurrencyFollowing, :count)
           end
@@ -98,7 +98,7 @@ RSpec.describe CurrencyFollowerManager, type: :interactor do
 
           it "fails when removing multiple" do
             expect { CurrencyFollowerManager.call parameters.call }.to change(CurrencyFollowing, :count)
-            
+
             5.times do
               expect { CurrencyFollowerManager.call parameters.call }.to_not change(CurrencyFollowing, :count)
             end

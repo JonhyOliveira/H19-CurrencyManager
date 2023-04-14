@@ -27,9 +27,9 @@ class CurrencyFollowerManager
 
     if follow
       following = CurrencyFollowing.new association_params
-      
+
       # this could be changed if multiple user types are needed (premium, etc.)
-      follow_limit = 50 
+      follow_limit = 50
 
       context.fail! message: "currencyfollower.user_follow_limit_reached" unless CurrencyFollowing.where(follower: user).count < follow_limit
 

@@ -27,14 +27,7 @@
       y: {
         
         grid: {
-          color: (context) => {
-            console.log(context)
-            if (context.tick.value > 1)
-              return "rgba(100, 240, 100, 0.4)"
-            else if (context.tick.value < 1)
-              return "rgba(240, 100, 100, 0.4)"
-            return "rgba(150, 150, 150, 0.4)"
-          },
+          color: "rgba(150, 150, 150, 0.4)",
           display: true,
           drawOnChartArea: true
         }
