@@ -24,8 +24,8 @@
 
 <% if defined? graph_range %>
   <div class="flex flex-col">
-    <strong>Latest exchange rate:</strong> <%= format_currency_ex_rate currency %>
-    <strong>Last update:</strong> <%= currency.updated_at %>
+    <span><strong>Latest exchange rate:</strong> <%= format_currency_ex_rate currency %></span>
+    <span><strong>Last update:</strong> <%= currency.updated_at %></span>
   </div>
   <div class="w-full flex" >
     <%= render "currencies/currency_graph", currency_codes: [ currency.code ], graph_range: graph_range %>
