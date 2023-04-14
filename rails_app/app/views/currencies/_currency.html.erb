@@ -3,13 +3,14 @@
   <h1>
     <%= currency.name %> (<%= currency.symbol %>)
   </h1>
-  <%= form_with url: currency_follow_path(currency), method: current_user.followed_currencies.include?(currency) ? :delete : :put do | form | %> 
-    <div>
-      <strong>Latest exchange rate:</strong> <%= format_currency_ex_rate currency %>
-      <strong>Last update:</strong> <%= currency.updated_at %>
-    </div>
 
-    <% if user_signed_in? %>
+  <% if user_signed_in? %>
+    <%= form_with url: currency_follow_path(currency), method: current_user.followed_currencies.include?(currency) ? :delete : :put do | form | %> 
+      <div>
+        <strong>Latest exchange rate:</strong> <%= format_currency_ex_rate currency %>
+        <strong>Last update:</strong> <%= currency.updated_at %>
+      </div>
+
       <% if current_user.followed_currencies.include? currency %>
         <span>Unfollow this currency and live a boring life.</span>
         <%= form.submit "Unfollow" %>
@@ -22,6 +23,10 @@
 </div>
 
 <% if defined? graph_range %>
+  <div>
+    <strong>Latest exchange rate:</strong> <%= format_currency_ex_rate currency %>
+    <strong>Last update:</strong> <%= currency.updated_at %>
+  </div>
   <div class="w-full flex" >
     <%= render "currencies/currency_graph", currency_codes: [ currency.code ], graph_range: graph_range %>
   </div>
