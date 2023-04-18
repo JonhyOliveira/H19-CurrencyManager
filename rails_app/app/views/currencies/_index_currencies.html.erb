@@ -4,46 +4,33 @@
 #   based_on     [Currency] shows the exchange rates based on another currency's exchange rate 
 #   followed_codes     [String[]] specifies which currencies should be displayed as followed
 %>
-
 <% if currencies.length > 0 %>
-    <table class="table w-full rounded-lg border-2 border-slate-600 border-separate bg-slate-800 border-spacing-2 text-center">
-      <thead class="text-gray-300">
-        <tr>
-          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Name</th>
-          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Latest Exchange Rate</th>
-          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Symbol</th>
-          <% if defined?(followed_codes) %>
-          <th class="border-4 border-double border-slate-600 px-2 py-1.5">Follows</th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-      <% currencies.each do |currency| %>
-        <tr>
-          <td class="border border-slate-700 px-2 py-0.5"><%= link_to currency.name, currency %></td>
-          <td class="border border-slate-700 px-2 py-0.5">
-            <% if defined?(based_on) && based_on != nil %>
-            <div class="targetable tooltip">
-              <span class='tooltip-text bg-slate-700 -my-8 rounded'>
-                <%= format_currency_ex_rate currency, false, false %>
+  <div class="container">
+    <div class="grid grid-cols-4 grid-flow-row place-items-center gap-3">
+      <% currencies.each do |currency|  %>
+        <%= link_to(currency, class: "w-full h-full p-4 pt-2 bg-slate-800 rounded-lg flex flex-row place-content-between gap-2") do %>
+          <div class="flex flex-col">
+            <span class="font-mono" >
+              <span class="text-xl">
+                <%= currency.symbol %>
               </span>
+              <span class="text-xs line-clamp-1"><%= currency.name %></span>
+            </span>
+            <% if defined?(based_on) && based_on != nil %>
               <%= format_currency_ex_rate currency, true %>
-            </div>
             <% else %>
-              <%= format_currency_ex_rate currency, true %>
+              <span><%= format_currency_ex_rate currency, true %> Exchange Rate</span>
             <% end %>
-          </td>
-          <td class="border border-slate-700 px-2 py-0.5"><%= currency.symbol %></td>
+          </div>
           <% if defined?(followed_codes) %>
-            <td class="border border-slate-700 px-2 py-0.5">
-              <%= button_to followed_codes.include?(currency.code) ? "Yes" : "No", 
-                currency_follow_path(currency), method: followed_codes.include?(currency.code) ? :delete : :post %>
-            </td>
+            <%= button_to followed_codes.include?(currency.code) ? "Unfollow" : "Follow", 
+                currency_follow_path(currency), method: followed_codes.include?(currency.code) ? :delete : :post, 
+                form_class: "h-full rounded-lg p-1 px-4 flex w-fit mt-2 " + (followed_codes.include?(currency.code) ? "bg-rose-950 hover:bg-red-900" : "bg-sky-900 hover:bg-sky-800")%>
           <% end %>
-        </tr>
+        <% end %>
       <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    No currencies to show.
-  <% end %>
+    </div>
+  </div>
+<% else %>
+  No currencies to show.
+<% end %>

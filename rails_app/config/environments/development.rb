@@ -63,6 +63,8 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  config.assets.debug = true
+
   # Show console for docker too
   config.web_console.permissions = "172.0.0.0/8"
 
