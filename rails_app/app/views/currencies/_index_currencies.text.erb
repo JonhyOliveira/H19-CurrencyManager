@@ -1,0 +1,12 @@
+<% if currencies.length > 0 %>
+    <% currencies.each do |currency| %>
+
+<%= currency.name %> (<%= currency.symbol %>)
+
+Latest exchange rate: <%= currency.latest_exchange_rate %>
+
+===
+    <% end %>
+<% else %>
+No currencies to show.
+<% end %>
