@@ -13,13 +13,12 @@ class LoadCurrenciesHistoryJob < ApplicationJob
     
     unless result.failure?
       # insert_all ignores conflicts by default (doesn't fail if there is a conflict)
-      CurrencyRecord.insert_all result.data.flat_map do |date, incoming_records| 
-        incoming_records.map do |currency_code, ex_rate|
+      CurrencyRecord.insert_all result.data.flat_map { |date, incoming_records| 
+        incoming_records.map { |currency_code, ex_rate|
           { record_date: date.to_date, code: currency_code, latest_exchange_rate: ex_rate }
-        end
-      end
+        }
+      }
     end
     
   end
-end
 end
