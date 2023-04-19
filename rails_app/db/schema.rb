@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_13_143019) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_19_155013) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_143019) do
     t.index ["code", "record_date"], name: "index_currency_records_on_code_and_record_date", unique: true
     t.index ["code"], name: "index_currency_records_on_code"
     t.index ["record_date"], name: "index_currency_records_on_record_date"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "users", force: :cascade do |t|

@@ -7,7 +7,6 @@ class FollowNewsletterMailer < ApplicationMailer
 
     def summary
         puts params
-        @descriptive = "fucking new"
         user = @recipient
         @currencies = CurrencyFollowing.where(follower_email: user.email).map { |following| following.followed_currency }
 
