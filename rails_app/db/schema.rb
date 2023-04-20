@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_13_143019) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_20_093748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "currencies", primary_key: "code", id: :string, force: :cascade do |t|
+  create_table "currencies", force: :cascade do |t|
+    t.string "code", null: false
     t.float "latest_exchange_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,18 +30,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_143019) do
     t.string "followed_currency_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follower_email", "followed_currency_code"], name: "unique_on_follower_+_followed_currency", unique: true
+    t.bigint "currency_id"
+    t.bigint "user_id"
+    t.index ["user_id", "currency_id"], name: "unique_user+currency", unique: true
   end
 
   create_table "currency_records", force: :cascade do |t|
-    t.string "code", null: false
     t.date "record_date", null: false
     t.float "latest_exchange_rate", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code", "record_date"], name: "index_currency_records_on_code_and_record_date", unique: true
-    t.index ["code"], name: "index_currency_records_on_code"
+    t.bigint "currency_id"
+    t.index ["currency_id", "record_date"], name: "unique_currency+date", unique: true
+    t.index ["currency_id"], name: "index_currency_records_on_currency_id"
     t.index ["record_date"], name: "index_currency_records_on_record_date"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,13 +69,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_143019) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "favorite_currency_code"
+    t.bigint "favorite_currency_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "currency_followings", "currencies", column: "followed_currency_code", primary_key: "code"
-  add_foreign_key "currency_followings", "users", column: "follower_email", primary_key: "email"
-  add_foreign_key "currency_records", "currencies", column: "code", primary_key: "code"
-  add_foreign_key "users", "currencies", column: "favorite_currency_code", primary_key: "code"
+  add_foreign_key "currency_followings", "currencies"
+  add_foreign_key "currency_followings", "users"
+  add_foreign_key "currency_records", "currencies"
+  add_foreign_key "users", "currencies", column: "favorite_currency_id"
 end

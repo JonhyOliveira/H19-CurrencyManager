@@ -15,7 +15,7 @@ class LoadCurrenciesHistoryJob < ApplicationJob
       unless result.failure?
         result.data.each do |date, records|
           records.each do |currency_code, ex_rate|
-            record = CurrencyRecord.find_or_initialize_by record_date: date.to_date, code: currency_code
+            record = CurrencyRecord.find_or_initialize_by record_date: date.to_date, currency: Currency.find_by(code: currency_code)
             record.update latest_exchange_rate: ex_rate
           end
         end

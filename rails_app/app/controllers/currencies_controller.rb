@@ -9,8 +9,6 @@ class CurrenciesController < ApplicationController
 
   # GET /currencies or /currencies.json
   def index
-    puts "signed in = #{user_signed_in?}"
-
     if user_signed_in?
       redirect_to followed_currencies_path
     else
