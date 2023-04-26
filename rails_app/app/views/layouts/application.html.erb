@@ -42,7 +42,9 @@
 
       <div class="container py-4 px-8">
         <% if defined?(current_user.favorite_currency) && current_user.favorite_currency != nil %>
-          Your favorite currency is <%= current_user.favorite_currency.code %> (<%= current_user.favorite_currency.symbol %>)
+          Your favorite currency is <%= current_user.favorite_currency.code %> (<%= current_user.favorite_currency.symbol %>). Change it <%= link_to "here", change_favorite_currency_path %>
+        <% else %>
+          You don't have a favorite currency. Set one <%= link_to "here", change_favorite_currency_path %>
         <% end %>
         <div class="max-w-full flex flex-col gap-5 place-items-center">
           <%= yield %>

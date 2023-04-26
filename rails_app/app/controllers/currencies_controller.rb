@@ -5,7 +5,7 @@
 #
 class CurrenciesController < ApplicationController
 
-  before_action :authenticate_user!, only: [:follow, :unfollow, :followed]
+  before_action :authenticate_user!, only: [:follow, :unfollow, :followed, :change_favorite, :edit_favorite]
 
   # GET /currencies or /currencies.json
   def index
@@ -38,6 +38,16 @@ class CurrenciesController < ApplicationController
       user = current_user
 
       @followed_codes = user.followed_currencies.map { |curr| curr.code }
+    end
+  end
+
+  def edit_favorite
+    @user = current_user
+  end
+
+  def change_favorite
+    if current_user.update favorite_currency_id: params[:user][:favorite_currency_id]
+      redirect_to root_path
     end
   end
 
