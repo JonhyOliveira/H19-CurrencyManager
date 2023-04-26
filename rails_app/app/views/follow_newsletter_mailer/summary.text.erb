@@ -1,0 +1,8 @@
+Hello <%= @recipient.email %>!
+
+Hope this email finds you well.
+Below, you can find your <%= "#{@descriptive} summary".squish %>.
+
+===
+
+<%= render "currencies/index_currencies", currencies: @currencies %>

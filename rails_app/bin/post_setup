@@ -24,4 +24,7 @@ FileUtils.chdir APP_ROOT do
   puts "\n== Loading Currencies History =="
   system! 'bin/rails runner "LoadCurrenciesHistoryJob.perform_now date_range: (DateTime.now.to_date - 1.day - 1.year)..(DateTime.now.to_date - 1.day)"'
 
+  puts "\n== Scheduling recurring jobs =="
+  system! 'bin/rake recurring:init'
+
 end

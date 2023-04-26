@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <div class="container m-4 flex flex-col gap-2">
+        <p>Hi <%= @recipient.email %>!</p>
+
+        Below you can find your <%= "#{@descriptive} currency summary".squish %>.
+        <%= render "currencies/index_currencies", currencies: @currencies %>
+    </div>
+  </body>
+</html>
