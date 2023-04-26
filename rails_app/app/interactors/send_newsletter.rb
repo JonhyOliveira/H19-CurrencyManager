@@ -12,7 +12,9 @@ class SendNewsletter
   end
 
   def call
-    User.all.each do |user|
+
+    User
+    User.in_batches.each do |user|
       # send the weekly followed newsletter
       FollowNewsletterMailer.with(user: user, descriptive: "weekly followed").summary.deliver
     end
