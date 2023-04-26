@@ -8,19 +8,17 @@ class LoadCurrenciesHistoryJob < ApplicationJob
 
     puts options[:date_range]
 
-    Currency.transaction do
-      # update record list
-      result = FreecurrencyApi.call endpoint: "historical", options: { date_from: options[:date_range].first, date_to: options[:date_range].last }
+    # update record list
+    result = FreecurrencyApi.call endpoint: "historical", options: { date_from: options[:date_range].first, date_to: options[:date_range].last }
 
-      unless result.failure?
-        result.data.each do |date, records|
-          records.each do |currency_code, ex_rate|
-            record = CurrencyRecord.find_or_initialize_by record_date: date.to_date, code: currency_code
-            record.update latest_exchange_rate: ex_rate
-          end
-        end
-      end
-
+    unless result.failure?
+      # insert_all ignores conflicts by default (doesn't fail if there is a conflict)
+      CurrencyRecord.insert_all result.data.flat_map { |date, incoming_records|
+        incoming_records.map { |currency_code, ex_rate|
+          { record_date: date.to_date, code: currency_code, latest_exchange_rate: ex_rate }
+        }
+      }
     end
+
   end
 end
