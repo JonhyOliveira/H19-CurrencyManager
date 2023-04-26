@@ -7,7 +7,7 @@ class LoadCurrenciesHistoryJob < ApplicationJob
     options[:date_range] ||= (DateTime.now.to_date - 1.day - 1.week)..(DateTime.now.to_date - 1.day)
 
     puts options[:date_range]
-    
+
     # update record list
     result = FreecurrencyApi.call endpoint: "historical", options: { date_from: options[:date_range].first, date_to: options[:date_range].last }
 
