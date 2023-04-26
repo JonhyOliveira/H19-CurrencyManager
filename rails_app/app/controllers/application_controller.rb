@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_devise_parameters, if: :devise_controller?
 
   def configure_permitted_devise_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:favorite_currency_code])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:favorite_currency_id])
   end
 
     # Overwriting the sign_out redirect path method
