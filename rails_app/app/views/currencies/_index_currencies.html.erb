@@ -16,10 +16,14 @@
               </span>
               <span class="text-xs line-clamp-1"><%= currency.name %></span>
             </span>
-            <% if defined?(based_on) && based_on != nil %>
-              <%= format_currency_ex_rate currency, true %>
+            <% if defined?(format_currency_ex_rate) %>
+              <% if defined?(based_on) && based_on != nil %>
+                <%= format_currency_ex_rate currency, true %>
+              <% else %>
+                <span><%= format_currency_ex_rate currency, true %> Exchange Rate</span>
+              <% end %>
             <% else %>
-              <span><%= format_currency_ex_rate currency, true %> Exchange Rate</span>
+              <%= currency.latest_exchange_rate %>
             <% end %>
           </div>
           <% if defined?(followed_codes) %>
