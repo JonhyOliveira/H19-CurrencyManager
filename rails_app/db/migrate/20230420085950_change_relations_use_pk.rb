@@ -5,9 +5,8 @@ class ChangeRelationsUsePk < ActiveRecord::Migration[7.0]
 
       t.remove_index([:follower_email, :followed_currency_code])
 
-      t.remove_foreign_key column: :follower_email if t.foreign_key_exists? column: :follower_email
-
-      t.remove_foreign_key column: :followed_currency_code if t.foreign_key_exists? column: :followed_currency_code
+      t.remove_foreign_key column: :follower_email
+      t.remove_foreign_key column: :followed_currency_code
 
       t.bigint :currency_id
       t.foreign_key :currencies
