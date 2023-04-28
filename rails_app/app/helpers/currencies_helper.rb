@@ -33,7 +33,14 @@ module CurrenciesHelper
 
     # round if needed
     if round
-      ex_rate = ex_rate.round(user_signed_in? && current_user.favorite_currency != nil ? current_user.favorite_currency.decimal_digits : (currency.decimal_digits || 0))
+      decimal_places = if user_signed_in? && current_user.favorite_currency
+        current_user.favorite_currency.decimal_digits
+      else
+        currency.decimal_digits || 0
+      end
+      
+      ex_rate = ex_rate.round(decimal_places)
+      puts "t"
     end
 
     return ex_rate
