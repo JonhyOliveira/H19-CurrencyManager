@@ -47,7 +47,9 @@ class CurrenciesController < ApplicationController
   end
 
   def change_favorite
-    if current_user.update favorite_currency_id: params[:user][:favorite_currency_id]
+    new_favorite = Currency.find_by id: params[:user][:favorite_currency_id]
+
+    if current_user.update favorite_currency: new_favorite
       redirect_to root_path
     end
   end
