@@ -51,7 +51,7 @@ module CurrenciesHelper
 
     # if the user has a favorite currency get the record for the same date and relativize
     if user_signed_in? && current_user.favorite_currency != nil
-      ex_rate = CurrencyRecord.find_by(currency_id: current_user.favorite_currency.code,
+      ex_rate = CurrencyRecord.find_by(currency_id: current_user.favorite_currency.id,
         record_date: record.record_date).latest_exchange_rate / ex_rate
     end
 
