@@ -23,7 +23,7 @@ class CurrenciesController < ApplicationController
     if user_signed_in?
       user = current_user
 
-      @followed_codes = user.followed_currencies.map { |curr| curr.code }
+      @followed_codes = user.followed_currencies.pluck(:code)
     end
   end
 
@@ -39,7 +39,7 @@ class CurrenciesController < ApplicationController
 
     @currencies = user.followed_currencies
 
-    @followed_codes = @currencies.map { |curr| curr.code }
+    @followed_codes = @currencies.pluck(:code)
   end
 
   def edit_favorite
