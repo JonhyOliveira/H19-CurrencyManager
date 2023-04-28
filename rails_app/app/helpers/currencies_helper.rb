@@ -40,7 +40,6 @@ module CurrenciesHelper
       end
       
       ex_rate = ex_rate.round(decimal_places)
-      puts "t"
     end
 
     return ex_rate
