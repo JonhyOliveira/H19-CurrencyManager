@@ -14,7 +14,7 @@
     <% currency_codes.each do | currency_code | %>
       {
         label: "<%= sanitize currency_code %> exchange rate",
-        data: <%= sanitize CurrencyRecord.where(code: currency_code, record_date: graph_range.to_a)
+        data: <%= sanitize CurrencyRecord.where(currency: Currency.find_by(code: currency_code), record_date: graph_range.to_a)
           .order(:record_date).map { | record | relativize_record_ex_rate record }.to_s %>,
         borderWidth: 1
       },

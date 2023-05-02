@@ -33,7 +33,13 @@ module CurrenciesHelper
 
     # round if needed
     if round
-      ex_rate = ex_rate.round(user_signed_in? && current_user.favorite_currency != nil ? current_user.favorite_currency.decimal_digits : currency.decimal_digits)
+      decimal_places = if user_signed_in? && current_user.favorite_currency
+        current_user.favorite_currency.decimal_digits
+      else
+        currency.decimal_digits || 0
+      end
+      
+      ex_rate = ex_rate.round(decimal_places)
     end
 
     return ex_rate
@@ -44,7 +50,7 @@ module CurrenciesHelper
 
     # if the user has a favorite currency get the record for the same date and relativize
     if user_signed_in? && current_user.favorite_currency != nil
-      ex_rate = CurrencyRecord.find_by(code: current_user.favorite_currency.code,
+      ex_rate = CurrencyRecord.find_by(currency_id: current_user.favorite_currency.id,
         record_date: record.record_date).latest_exchange_rate / ex_rate
     end
 

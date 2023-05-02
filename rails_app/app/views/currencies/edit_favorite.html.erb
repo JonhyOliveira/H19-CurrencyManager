@@ -1,0 +1,18 @@
+<div class="page-form">
+
+  <h1>Edit Favorite Currency</h1>
+
+  <%= form_for(current_user, url: change_favorite_currency_path, html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: current_user %>
+
+    <div class="field">
+      <%= f.label :favorite_currency_id %>
+      <%= f.select :favorite_currency_id, Currency.all.collect { |curr| ["#{curr.symbol}: #{curr.name}", curr.id] }, include_blank: true %>
+    </div>
+
+    <%= f.submit "Update" %>
+
+  <% end %>
+
+</div>
+

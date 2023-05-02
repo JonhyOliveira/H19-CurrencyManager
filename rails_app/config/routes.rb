@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get "currencies/followed", to: "currencies#followed", as: "followed_currencies"
   get "currencies/all", to: "currencies#all", as: "all_currencies"
+  get "currencies/change_favorite", to: "currencies#edit_favorite", as: "edit_favorite_currency"
+  put "currencies/change_favorite", to: "currencies#change_favorite", as: "change_favorite_currency"
 
   resources :currencies, only: [:show, :index] do
 

@@ -36,7 +36,8 @@
     </div>
 
     <div class="field">
-      <%= f.select :favorite_currency_code, Currency.all.collect { |curr| ["#{curr.symbol}: #{curr.name}", curr.code] }, include_blank: true %>
+      <%= f.label :favorite_currency_id %>
+      <%= f.select :favorite_currency_id, Currency.all.collect { |curr| ["#{curr.symbol}: #{curr.name}", curr.id] }, include_blank: true %>
     </div>
 
     <%= f.submit "Update" %>

@@ -9,7 +9,7 @@ RSpec.describe CurrencyRecord, type: :model do
 
     currency_record = CurrencyRecord.new
 
-    currency_record.code = curr.code
+    currency_record.currency_id = curr.id
     currency_record.latest_exchange_rate = 0.1
     currency_record.record_date = DateTime.now
 
@@ -24,13 +24,13 @@ RSpec.describe CurrencyRecord, type: :model do
 
       currency_record = CurrencyRecord.new
 
-      currency_record.code = ":("
+      currency_record.currency_id = -1
       currency_record.latest_exchange_rate = 0.1
       currency_record.record_date = DateTime.now
 
       expect(currency_record).to_not be_valid
 
-      currency_record.code = curr.code
+      currency_record.currency_id = curr.id
 
       expect(currency_record).to be_valid
     end
@@ -41,7 +41,7 @@ RSpec.describe CurrencyRecord, type: :model do
 
       currency_record = CurrencyRecord.new
 
-      currency_record.code = curr.code
+      currency_record.currency_id = curr.id
       currency_record.record_date = DateTime.now
       currency_record.latest_exchange_rate = 0
 
