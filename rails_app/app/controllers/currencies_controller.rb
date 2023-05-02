@@ -5,7 +5,7 @@
 #
 class CurrenciesController < ApplicationController
 
-  before_action :authenticate_user!, only: [:follow, :unfollow, :followed]
+  before_action :authenticate_user!, except: [:index, :show, :all]
 
   # GET /currencies or /currencies.json
   def index
@@ -15,6 +15,18 @@ class CurrenciesController < ApplicationController
       redirect_to all_currencies_path
     end
   end
+  
+  # GET /currencies/all or /currencies/all.json
+  def all
+    @currencies = Currency.all
+
+    if user_signed_in?
+      user = current_user
+
+      @followed_codes = user.followed_currencies.pluck(:code)
+    end
+  end
+
 
   # GET /currencies/EUR or /currencies/EUR.json
   def show
@@ -27,17 +39,18 @@ class CurrenciesController < ApplicationController
 
     @currencies = user.followed_currencies
 
-    @followed_codes = @currencies.map { |curr| curr.code }
+    @followed_codes = @currencies.pluck(:code)
   end
 
-  # GET /currencies/all or /currencies/all.json
-  def all
-    @currencies = Currency.all
+  def edit_favorite
+    @user = current_user
+  end
 
-    if user_signed_in?
-      user = current_user
+  def change_favorite
+    new_favorite = Currency.find_by id: params[:user][:favorite_currency_id]
 
-      @followed_codes = user.followed_currencies.map { |curr| curr.code }
+    if current_user.update favorite_currency: new_favorite
+      redirect_to root_path
     end
   end
 
@@ -57,6 +70,7 @@ class CurrenciesController < ApplicationController
     handle_result CurrencyFollowerManager.call user: user, currency: currency, follow: false
   end
 
+  private
   #
   # Handles the result of an interactor
   #
