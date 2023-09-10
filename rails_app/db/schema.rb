@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_10_145337) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_10_153444) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,7 +34,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_145337) do
     t.string "name"
     t.string "name_plural"
     t.integer "decimal_digits"
-    t.text "description"
   end
 
   create_table "currency_followings", force: :cascade do |t|
@@ -58,6 +57,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_145337) do
     t.index ["record_date"], name: "index_currency_records_on_record_date"
   end
 
+  create_table "currency_translations", force: :cascade do |t|
+    t.text "description"
+    t.string "locale", null: false
+    t.string "currency_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_id", "locale"], name: "index_currency_translations_on_currency_id_and_locale", unique: true
+    t.index ["locale"], name: "index_currency_translations_on_locale"
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -71,31 +80,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_145337) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
-  end
-
-  create_table "mobility_string_translations", force: :cascade do |t|
-    t.string "locale", null: false
-    t.string "key", null: false
-    t.string "value"
-    t.string "translatable_type"
-    t.bigint "translatable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["translatable_id", "translatable_type", "key"], name: "index_mobility_string_translations_on_translatable_attribute"
-    t.index ["translatable_id", "translatable_type", "locale", "key"], name: "index_mobility_string_translations_on_keys", unique: true
-    t.index ["translatable_type", "key", "value", "locale"], name: "index_mobility_string_translations_on_query_keys"
-  end
-
-  create_table "mobility_text_translations", force: :cascade do |t|
-    t.string "locale", null: false
-    t.string "key", null: false
-    t.text "value"
-    t.string "translatable_type"
-    t.bigint "translatable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["translatable_id", "translatable_type", "key"], name: "index_mobility_text_translations_on_translatable_attribute"
-    t.index ["translatable_id", "translatable_type", "locale", "key"], name: "index_mobility_text_translations_on_keys", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,5 +98,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_145337) do
   add_foreign_key "currency_followings", "currencies"
   add_foreign_key "currency_followings", "users"
   add_foreign_key "currency_records", "currencies"
+  add_foreign_key "currency_translations", "currencies"
   add_foreign_key "users", "currencies", column: "favorite_currency_id"
 end
