@@ -24,6 +24,8 @@ module RailsApp
     config.app = ActiveSupport::OrderedOptions.new
     config.app.freecurrencyapi = config_for(:freecurrencyapi)
 
+    I18n.available_locales = [ :en, :pt ]
+
     config.active_job.queue_adapter = :delayed_job
   end
 end
