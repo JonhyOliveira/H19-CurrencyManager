@@ -11,10 +11,10 @@
   data = {
     labels: <%= sanitize graph_range.map { | date | date.to_s }.to_s %>,
     datasets: [
-    <% currency_codes.each do | currency_code | %>
+    <% currencies.each do | currency | %>
       {
-        label: "<%= sanitize currency_code %> exchange rate",
-        data: <%= sanitize CurrencyRecord.where(currency: Currency.find_by(code: currency_code), record_date: graph_range.to_a)
+        label: "<%= sanitize currency.id %> exchange rate",
+        data: <%= sanitize CurrencyRecord.where(currency: currency, record_date: graph_range)
           .order(:record_date).map { | record | relativize_record_ex_rate record }.to_s %>,
         borderWidth: 1
       },
@@ -25,7 +25,7 @@
   options = {
     scales: {
       y: {
-        
+
         grid: {
           color: "rgba(150, 150, 150, 0.4)",
           display: true,

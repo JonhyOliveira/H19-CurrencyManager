@@ -34,4 +34,4 @@ COPY . .
 
 # serve the app
 EXPOSE 3000
-CMD [ "sh", "-c", "cron && bundle exec rails server -b 0.0.0.0"]
+CMD [ "sh", "-c", "rm -f /tmp/pids/* && cron && bundle exec rails server -b 0.0.0.0"]

@@ -15,7 +15,7 @@ class CurrenciesController < ApplicationController
       redirect_to all_currencies_path
     end
   end
-  
+
   # GET /currencies/all or /currencies/all.json
   def all
     @currencies = Currency.all
@@ -23,7 +23,7 @@ class CurrenciesController < ApplicationController
     if user_signed_in?
       user = current_user
 
-      @followed_codes = user.followed_currencies.pluck(:code)
+      @followed_codes = user.followed_currencies.pluck(:id)
     end
   end
 
@@ -38,8 +38,6 @@ class CurrenciesController < ApplicationController
     user = current_user
 
     @currencies = user.followed_currencies
-
-    @followed_codes = @currencies.pluck(:code)
   end
 
   def edit_favorite
@@ -47,7 +45,7 @@ class CurrenciesController < ApplicationController
   end
 
   def change_favorite
-    new_favorite = Currency.find_by id: params[:user][:favorite_currency_id]
+    new_favorite = Currency.find(params[:user][:favorite_currency_id])
 
     if current_user.update favorite_currency: new_favorite
       redirect_to root_path

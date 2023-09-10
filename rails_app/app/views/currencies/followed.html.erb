@@ -1,8 +1,8 @@
 <h1 class="text-2xl font-bold ml-4">Followed Currencies</h1>
 
 <% if user_signed_in? %>
-    <%= render "currencies/index_currencies", currencies: @currencies, 
-        followed_codes: @followed_codes, based_on: current_user.favorite_currency %>
+    <%= render "currencies/index_currencies", currencies: @currencies,
+        followed_codes: @currencies.pluck(:id), based_on: current_user.favorite_currency %>
 <% else %>
     How did you get here? 🤨
 <% end %>

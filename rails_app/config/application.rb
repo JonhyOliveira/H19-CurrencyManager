@@ -21,6 +21,9 @@ module RailsApp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.app = ActiveSupport::OrderedOptions.new
+    config.app.freecurrencyapi = config_for(:freecurrencyapi)
+
     config.active_job.queue_adapter = :delayed_job
   end
 end

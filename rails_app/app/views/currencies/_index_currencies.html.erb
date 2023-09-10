@@ -1,7 +1,7 @@
-<% 
+<%
 # This view NEEDS the `currencies` option to render properly
 # This view CAN receive the following optional options:
-#   based_on     [Currency] shows the exchange rates based on another currency's exchange rate 
+#   based_on     [Currency] shows the exchange rates based on another currency's exchange rate
 #   followed_codes     [String[]] specifies which currencies should be displayed as followed
 %>
 <% if currencies.length > 0 %>
@@ -27,9 +27,9 @@
             <% end %>
           </div>
           <% if defined?(followed_codes) %>
-            <%= button_to followed_codes.include?(currency.code) ? "Unfollow" : "Follow", 
-                currency_follow_path(currency), method: followed_codes.include?(currency.code) ? :delete : :post, 
-                class: "md:w-full h-full rounded-lg p-1 px-4 w-fit mt-2 " + (followed_codes.include?(currency.code) ? "bg-rose-950 hover:bg-red-900" : "bg-sky-900 hover:bg-sky-800")%>
+            <%= button_to followed_codes.include?(currency.id) ? "Unfollow" : "Follow",
+                currency_follow_path(currency), method: followed_codes.include?(currency.id) ? :delete : :post,
+                class: "md:w-full h-full rounded-lg p-1 px-4 w-fit mt-2 " + (followed_codes.include?(currency.id) ? "bg-rose-950 hover:bg-red-900" : "bg-sky-900 hover:bg-sky-800")%>
           <% end %>
         <% end %>
       <% end %>

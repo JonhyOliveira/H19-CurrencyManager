@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  active_admin:
+    dashboard: "Home"
+    dashboard_welcome:
+      welcome: "Hi!"
+      call_to_action: "This is an awesome site for awesome people. Please be awesome"

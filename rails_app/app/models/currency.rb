@@ -2,8 +2,8 @@
 
 class Currency < ApplicationRecord
 
-  validates :code, presence: true, allow_nil: false, length: { minimum: 1 }
-  validates :latest_exchange_rate, allow_nil: true, numericality: { greater_than: 0 }
+  validates :id, presence: true, length: { minimum: 1 }
+  validates :latest_exchange_rate, allow_nil: true, numericality: { greater_than_or_equal: 0 }
   validates :symbol, presence: true
   validates :name, presence: true
   validates :name_plural, presence: true
@@ -16,13 +16,17 @@ class Currency < ApplicationRecord
 
   has_many :history, class_name: "CurrencyRecord"
 
-  def code=(val)
-    self[:code] = val
+  before_validation :capitalize_code
 
-    self[:code] = self[:code].upcase if self[:code].respond_to? :upcase!
+  def capitalize_code
+    self.id = self.id.upcase if self.id.respond_to? :upcase!
   end
 
   def ex_rate_rounded
     self[:latest_exchange_rate].round(self[:decimal_digits])
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["currency_followings", "favorited_by", "followers", "history"]
   end
 end

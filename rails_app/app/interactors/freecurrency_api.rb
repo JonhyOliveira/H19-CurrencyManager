@@ -10,7 +10,7 @@ class FreecurrencyApi
   @@conn = Faraday.new "https://api.freecurrencyapi.com/v1/" do |c|
     c.response :json
     c.adapter :net_http
-    c.headers = { apikey: Rails.application.credentials.config[:free_currency][:API_key] }
+    c.headers = { apikey: Rails.configuration.app.freecurrencyapi[:api_key] }
   end
 
   def call
@@ -18,7 +18,6 @@ class FreecurrencyApi
       req.params = context.options if defined? context.options
     end
 
-    puts response.success?
     if response.success?
       context.data = response.body["data"]
     elsif reponse.body.is_a? Hash

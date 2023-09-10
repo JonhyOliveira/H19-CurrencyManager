@@ -9,10 +9,11 @@ class UpdateCurrenciesJob < ApplicationJob
 
       unless result.failure?
         result.data.each_value do |currency_info|
-          currency_info = currency_info.slice("name", "symbol", "code", "name_plural", "decimal_digits")
+          code = currency_info["code"]
+          update_params = currency_info.slice("name", "symbol", "name_plural", "decimal_digits")
 
-          curr = Currency.find_or_create_by code: currency_info["code"]
-          curr.update currency_info
+          curr = Currency.find_or_create_by(id: code)
+          curr.update(update_params)
         end
       end
 
@@ -21,11 +22,7 @@ class UpdateCurrenciesJob < ApplicationJob
 
       unless result.failure?
         result.data.each do |code, ex_rate|
-          curr = Currency.find_by(code: code)
-          unless curr.nil?
-            curr.latest_exchange_rate = ex_rate
-            curr.save
-          end
+          Currency.find_by(id: code)&.update(latest_exchange_rate: ex_rate)
         end
       end
     end

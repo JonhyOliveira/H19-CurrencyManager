@@ -6,7 +6,7 @@ RSpec.describe Currency, type: :model do
   it "is valid with acceptable parameters" do
     currency = Currency.new
 
-    currency.code = Faker::Finance.ticker
+    currency.id = Faker::Finance.ticker
     currency.symbol = "%"
     currency.name = Faker::Coin.name
     currency.name_plural = currency.name
@@ -21,7 +21,7 @@ RSpec.describe Currency, type: :model do
     it "with invalid code" do
       currency = Currency.new
 
-      currency.code = nil
+      currency.id = nil
       currency.symbol = "%"
       currency.name = Faker::Coin.name
       currency.name_plural = currency.name
@@ -29,11 +29,11 @@ RSpec.describe Currency, type: :model do
 
       expect(currency).to_not be_valid
 
-      currency.code = ""
+      currency.id = ""
 
       expect(currency).to_not be_valid
 
-      currency.code = "X"
+      currency.id = "X"
 
       expect(currency).to be_valid
     end
@@ -41,7 +41,7 @@ RSpec.describe Currency, type: :model do
     it "with invalid exchange rate" do
       currency = Currency.new
 
-      currency.code = Faker::Finance.ticker
+      currency.id = Faker::Finance.ticker
       currency.symbol = "%"
       currency.name = Faker::Coin.name
       currency.name_plural = currency.name

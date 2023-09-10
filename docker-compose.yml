@@ -1,26 +1,35 @@
 version: "3.8"
 
 services:
+
+  default_app: &default_app
+    build: ./rails_app
+    image: currency_manager:latest
+    depends_on:
+      - db
+    volumes:
+      - ./rails_app:/rails_app
+    environment:
+      - FREECURRENCYAPI_KEY=${FREECURRENCYAPI_KEY}
+
   db:
     image: postgres:15.2-bullseye
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
+    # ports:
+    #   - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
 
   rails_app:
-    build: ./rails_app
-    image: currency_manager:latest
+    <<: *default_app
     ports:
       - '3000:3000'
-    depends_on:
-      - db
-    volumes:
-      - ./rails_app:/rails_app
+
+  runner:
+    <<: *default_app
 
 volumes:
   db:
